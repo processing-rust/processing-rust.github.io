@@ -1,0 +1,19 @@
+/* RustMode CodeMirror theme colors -- matching Processing Java IDE */
+
+/* FUNCTION1: entry points + constructors -- bold dark blue */
+.cm-rustmode-f1 { color: #5b6aff !important; font-weight: bold; }
+
+/* FUNCTION2: API functions -- light blue */
+.cm-rustmode-f2 { color: #5ba4ff !important; }
+
+/* KEYWORD3: control flow -- green */
+.cm-rustmode-k3 { color: #4ec9a0 !important; }
+
+/* KEYWORD4: constants and built-in vars -- pink/magenta */
+.cm-rustmode-k4 { color: #d46fd4 !important; }
+
+/* KEYWORD5: types -- orange */
+.cm-rustmode-k5 { color: #e8a262 !important; }
+
+/* KEYWORD6: language keywords -- teal */
+.cm-rustmode-k6 { color: #4ec9b0 !important; }
