@@ -66,106 +66,92 @@
   <div class="content">
     <h1>What's New</h1>
     <p class="prelude">
-      Rust Mode is designed to feel as close to Processing Java as possible.
-      <strong>Most of what you already know works exactly the same.</strong>
-      <code>setup()</code>, <code>draw()</code>, <code>ellipse()</code>, <code>background()</code>,
-      <code>mouseX</code>, <code>mouseY</code>, <code>fill()</code>, <code>stroke()</code> all work the same way.
-      The changes below are the only things you need to learn.
-      Everything else carries over from Processing Java without modification.
+      Rust Mode keeps Processing's shape. <strong>A sketch is still setup(), draw() and the calls you know.</strong>
+      What changes is that it's Rust, so types are strict and names use snake_case:
+      <code>noStroke()</code> is <code>no_stroke()</code> and <code>mouseX</code> is <code>mouse_x()</code>
+      (the camelCase names work too). These are the things to know.
     </p>
     <div class="wn-grid">
       <div class="wn-card">
         <div class="wn-tag changed">Changed</div>
-        <div class="wn-card-title">PGraphics, PImage, PShape and PFont use pointer notation</div>
+        <div class="wn-card-title">Sketch variables are let at the top</div>
         <div class="wn-card-body">
-          <p>In Processing Java, graphics objects are references and you access their methods with a dot. In Rust Mode they are pointers, so you declare them with <code>*</code> and access their members with <code>-&gt;</code> instead of <code>.</code>.</p>
-          <pre>// Java (does not work in Rust Mode):
-PGraphics pg = createGraphics(400, 300);
-pg.beginDraw();
-pg.background(255);
-pg.endDraw();
+          <p>Variables your sketch keeps between frames are <code>let</code> lines at the top of the file. Add <code>mut</code> when they change. Rust Mode makes them available in <code>setup()</code>, <code>draw()</code> and the event functions.</p>
+          <pre>let mut x: f32 = 0.0;
 
-// Rust Mode:
-PGraphics* pg = createGraphics(400, 300);
-pg-&gt;beginDraw();
-pg-&gt;background(255);
-pg-&gt;endDraw();</pre>
-          <p>The same applies to <code>PImage*</code>, <code>PShape*</code>, <code>PFont*</code>, and <code>PShader*</code>. Forgetting the <code>*</code> or using <code>.</code> instead of <code>-&gt;</code> produces a compiler error.</p>
+fn draw() {
+    background(0);
+    x += 1.0;
+    ellipse(x, 50.0, 20.0, 20.0);
+}</pre>
         </div>
       </div>
       <div class="wn-card">
         <div class="wn-tag changed">Changed</div>
-        <div class="wn-card-title">_mousePressed and _keyPressed</div>
+        <div class="wn-card-title">Numbers have one type</div>
         <div class="wn-card-body">
-          <p>In Processing Java, <code>mousePressed</code> is both a boolean variable that tells you if the mouse is held right now, and an event callback function that fires once on click. Rust does not allow a variable and a function to share the same name in the same scope, so the boolean variables are renamed with an underscore prefix to avoid the collision.</p>
-          <p>The event callbacks keep their original names unchanged. Only the state variables change.</p>
-          <pre>// Check if mouse is currently held down:
-if (_mousePressed) { ... }
-// Check if any key is currently held down:
-if (_keyPressed) { ... }
-// Event callbacks are unchanged:
-void mousePressed() { ... }
-void mouseReleased() { ... }
-void keyPressed()   { ... }
-void keyReleased()  { ... }</pre>
+          <p>Rust doesn't mix <code>i32</code> and <code>f32</code> on its own. Write <code>2.0</code> when the number is an f32, and convert with <code>as</code>: <code>i as f32</code>, <code>x as i32</code>. Processing's calls take whole numbers fine: <code>size(640, 360)</code>, <code>fill(255, 0, 0)</code>.</p>
         </div>
       </div>
       <div class="wn-card">
-        <div class="wn-tag new">New</div>
-        <div class="wn-card-title">captureMouse() and releaseMouse()</div>
+        <div class="wn-tag changed">Changed</div>
+        <div class="wn-card-title">Math is a method</div>
         <div class="wn-card-body">
-          <p><code>captureMouse()</code> locks the cursor to the window and enables raw mouse input, completely bypassing OS acceleration and cursor boundaries. This is the right approach for first-person and shooter games where the mouse needs to rotate a camera freely without hitting the edge of the screen.</p>
-          <p><code>releaseMouse()</code> restores normal cursor behavior. Call it when you open a menu, show a dialog, or pause the game.</p>
-          <pre>void setup() {
-    size(640, 360, P3D);
-    captureMouse();
-}
-void draw() {
-    // camera controlled by mouse freely
-}
-void keyPressed() {
-    if (key == ESC) releaseMouse();
+          <p><code>sin(a)</code> becomes <code>a.sin()</code>, <code>sqrt(x)</code> can be <code>x.sqrt()</code>, and <code>atan2(y, x)</code> is <code>y.atan2(x)</code>. <code>map()</code>, <code>dist()</code>, <code>lerp()</code>, <code>constrain()</code> and <code>random()</code> are the same as in Java.</p>
+        </div>
+      </div>
+      <div class="wn-card">
+        <div class="wn-tag changed">Changed</div>
+        <div class="wn-card-title">Classes are structs</div>
+        <div class="wn-card-body">
+          <p>A class becomes a <code>struct</code> with its fields, and an <code>impl</code> with <code>new()</code> and its methods. A method that changes the object takes <code>&amp;mut self</code>.</p>
+          <pre>struct Ball { x: f32, y: f32 }
+
+impl Ball {
+    fn new(x: f32, y: f32) -> Ball {
+        Ball { x, y }
+    }
+    fn display(&amp;self) {
+        ellipse(self.x, self.y, 20.0, 20.0);
+    }
 }</pre>
+          <p>Rust has no <code>extends</code>. A struct can hold the one it builds on as a field, and a <code>trait</code> lets different kinds share one list.</p>
+        </div>
+      </div>
+      <div class="wn-card">
+        <div class="wn-tag changed">Changed</div>
+        <div class="wn-card-title">Lists are Vec</div>
+        <div class="wn-card-body">
+          <p>Java's arrays and ArrayList are both <code>Vec</code>: <code>vec![0.0; 10]</code>, <code>list.push(v)</code>, <code>list.len()</code>, <code>for b in balls.iter_mut() { ... }</code>.</p>
+        </div>
+      </div>
+      <div class="wn-card">
+        <div class="wn-tag changed">Changed</div>
+        <div class="wn-card-title">Text uses format!</div>
+        <div class="wn-card-body">
+          <p>Join text with <code>format!</code>: <code>text(&amp;format!("score: {}", score), 10.0, 20.0)</code>. Functions that take text take <code>&amp;str</code>.</p>
+        </div>
+      </div>
+      <div class="wn-card">
+        <div class="wn-tag changed">Changed</div>
+        <div class="wn-card-title">Images and layers are ids</div>
+        <div class="wn-card-body">
+          <p><code>load_image()</code> and <code>create_graphics()</code> give you a <code>u64</code> id. Ask it for what you need: <code>img.width()</code>, <code>img.get(x, y)</code>. Draw into a layer between <code>begin_graphics(pg)</code> and <code>end_graphics()</code>.</p>
+          <p>Pixels are a copy: <code>let mut px = load_pixels();</code>, change it, then <code>update_pixels(&amp;px);</code>.</p>
+        </div>
+      </div>
+      <div class="wn-card">
+        <div class="wn-tag same">Same</div>
+        <div class="wn-card-title">Overloads by number of arguments</div>
+        <div class="wn-card-body">
+          <p><code>fill(255)</code>, <code>fill(255, 0, 0)</code> and <code>fill(255, 0, 0, 128)</code> all work. Rust Mode picks the right engine function for you (<code>fill_rgb</code>, <code>fill_rgba</code>...).</p>
         </div>
       </div>
       <div class="wn-card">
         <div class="wn-tag new">New</div>
-        <div class="wn-card-title">mouseDX and mouseDY</div>
+        <div class="wn-card-title">Two renderers</div>
         <div class="wn-card-body">
-          <p>Two new variables that accumulate raw mouse movement between frames. Unlike <code>mouseX - pmouseX</code>, these capture every cursor event that occurs between frames so fast mouse movement is never dropped or lost at high frame rates.</p>
-          <p>They reset to <code>0</code> automatically after each <code>draw()</code> call. Use them for FPS camera rotation, turret aiming, or any other input that needs to be frame-rate independent.</p>
-          <pre>float yaw = 0, pitch = 0;
-void setup() {
-    size(640, 360, P3D);
-    captureMouse();
-}
-void draw() {
-    yaw   += mouseDX * 0.002;
-    pitch += mouseDY * 0.002;
-    pitch  = constrain(pitch, -PI/2, PI/2);
-    camera(0, 0, 0,
-           cos(pitch) * sin(yaw),
-           sin(pitch),
-           cos(pitch) * cos(yaw),
-           0, 1, 0);
-    background(20);
-    lights();
-    box(100);
-}</pre>
-        </div>
-      </div>
-      <div class="wn-card">
-        <div class="wn-tag new">New</div>
-        <div class="wn-card-title">Full Rust Standard Library included</div>
-        <div class="wn-card-body">
-          <p>Every Rust standard library header is included automatically. You do not need a single <code>#include</code> anywhere in your sketch. Threads, algorithms, containers, all of modern Rust is just there.</p>
-          <pre>// All of this just works with no includes:
-std::vector&lt;float&gt; data = {3, 1, 2};
-std::sort(data.begin(), data.end());
-std::thread t([] { doWork(); });
-t.detach();
-std::unordered_map&lt;std::string, int&gt; scores;
-std::optional&lt;int&gt; val = 42;</pre>
+          <p>The toolbar has a renderer menu. The default draws on the CPU. <strong>libprocessing</strong> draws with Bevy and wgpu on your graphics card, with real 3D lights and shaders.</p>
         </div>
       </div>
     </div>

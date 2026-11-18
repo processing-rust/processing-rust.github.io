@@ -167,65 +167,31 @@
  <p class="subtitle">Everything available in Rust Mode out of the box.</p>
 
  <div class="tip">
- None of these require an <code>#include</code>. They are all automatically available in every sketch through <code>Processing.h</code>.
+ None of these need a <code>use</code> line. Rust's standard library is always there, and every sketch starts with <code>use processing::*;</code> for you.
  </div>
 
- <h2>Containers</h2>
+ <h2>Rust's standard library</h2>
  <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/vector" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::vector</a></code><p>Dynamic array. The most common container. Use instead of Java's ArrayList.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/map" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::map</a></code><p>Key-value pairs sorted by key.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/unordered_map" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::unordered_map</a></code><p>Hash map. Faster lookups than std::map but unsorted.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/set" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::set</a></code><p>Sorted collection of unique values.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/unordered_set" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::unordered_set</a></code><p>Hash set. Faster lookups than std::set but unsorted.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/list" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::list</a></code><p>Doubly linked list. Fast insert and remove at any position.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/deque" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::deque</a></code><p>Double-ended queue. Fast insert and remove at both ends.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/queue" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::queue</a></code><p>FIFO queue adapter.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/container/stack" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::stack</a></code><p>LIFO stack adapter.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">Vec</a></code><p>Growable list. The one to use instead of Java's arrays and ArrayList.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/collections/index.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">HashMap / BTreeMap</a></code><p>Key-value maps: std::collections::HashMap. BTreeMap keeps the keys sorted.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/collections/index.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">HashSet / BTreeSet</a></code><p>Collections of unique values.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">VecDeque</a></code><p>A queue you can add to and take from at both ends.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/string/struct.String.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">String / &amp;str</a></code><p>Text. format!("x = {}", x) builds strings; text() takes &amp;str.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">Iterators</a></code><p>for x in list.iter(), .map(), .filter(), .sum(), .enumerate().</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/primitive.f32.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">f32 math</a></code><p>angle.sin(), x.sqrt(), y.atan2(x), v.abs(): math is a method on the number.</p></div>
+ <div class="lib-card"><code><a href="https://doc.rust-lang.org/std/macro.println.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">println! / format!</a></code><p>Print to the console, build text. Processing's println() works too.</p></div>
  </div>
 
- <h2>Algorithms</h2>
+ <h2>Processing's types</h2>
  <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/sort" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::sort</a></code><p>Sort any container. Works with lambdas for custom comparison.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/find" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::find</a></code><p>Find an element in a range.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/remove" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::remove_if</a></code><p>Remove elements matching a condition. Commonly used with vectors.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/min" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::min / std::max</a></code><p>Min and max of two values.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/accumulate" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::accumulate</a></code><p>Sum or fold a range of values.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/algorithm/transform" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::transform</a></code><p>Apply a function to every element in a range.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/iterator" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::iterator</a></code><p>Iterator utilities for working with ranges and containers.</p></div>
- </div>
-
- <h2>Strings and IO</h2>
- <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/string/basic_string" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::string</a></code><p>Text string. Use instead of Java's String.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/io/basic_stringstream" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::stringstream</a></code><p>Build strings from mixed types.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/io/basic_ifstream" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::ifstream</a></code><p>Read from files.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/io/basic_ofstream" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::ofstream</a></code><p>Write to files.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/regex" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::regex</a></code><p>Regular expressions for pattern matching.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/io/cout" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::cout / std::cerr</a></code><p>Print to the console. Also available as println().</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/iomanip" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::iomanip</a></code><p>Format output — set precision, width, fill characters.</p></div>
- </div>
-
- <h2>Concurrency</h2>
- <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/thread/thread" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::thread</a></code><p>Run code on a separate thread.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/functional" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::functional</a></code><p>Function wrappers, std::function, std::bind, lambdas.</p></div>
- </div>
-
- <h2>Utilities</h2>
- <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/utility/optional" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::optional</a></code><p>A value that may or may not be present.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/utility/variant" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::variant</a></code><p>A value that can be one of several types.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/utility/tuple" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::tuple</a></code><p>A fixed-size collection of values of different types.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/memory" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::unique_ptr / std::shared_ptr</a></code><p>Smart pointers for automatic memory management.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/chrono" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::chrono</a></code><p>Time utilities. Measure durations and get the current time.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/cstdlib" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::cstdlib / std::ctime</a></code><p>C standard library utilities and time functions.</p></div>
- </div>
-
- <h2>Math</h2>
- <div class="lib-grid">
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/cmath" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::cmath</a></code><p>sin, cos, tan, sqrt, pow, abs, floor, ceil and more.</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/random" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::random</a></code><p>Random number generation. Also available as random().</p></div>
- <div class="lib-card"><code><a href="https://en.cppreference.com/w/cpp/header/numeric" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">std::numeric</a></code><p>iota, accumulate, inner_product and more.</p></div>
+ <div class="lib-card"><code><a href="/reference/PVector.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid #ddd;">PVector</a></code><p>2D and 3D vectors: v.add(&amp;w), v.mag(), v.normalize(), and + - * / between vectors.</p></div>
+ <div class="lib-card"><code>Color</code><p>A color: color_rgb(255, 0, 0), red(c), lerp_color(a, b, t). Color::from_u32 for pixels.</p></div>
+ <div class="lib-card"><code>IntList / FloatList / StringList</code><p>Processing's lists, with sort(), shuffle(), sum() and the rest.</p></div>
+ <div class="lib-card"><code>IntDict / FloatDict / StringDict</code><p>Processing's dictionaries.</p></div>
+ <div class="lib-card"><code>Table / TableRow</code><p>CSV and TSV files: load_table(), t.get_row_count(), row.get_float("x").</p></div>
+ <div class="lib-card"><code>Json / Xml</code><p>load_json_object(), json.get_json_array("items"), load_xml(), xml.get_children("item").</p></div>
+ <div class="lib-card"><code>Images and layers</code><p>Images are ids (u64): img.width(), img.get(x, y), img.load_pixels(). Layers from create_graphics() draw between begin_graphics(pg) and end_graphics().</p></div>
+ <div class="lib-card"><code>PShape / fonts / PShader</code><p>SVG and OBJ shapes, create_shape(), fonts from create_font(), and GLSL shaders.</p></div>
  </div>
  </div>
 </div>

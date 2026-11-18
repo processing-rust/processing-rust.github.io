@@ -65,53 +65,44 @@
   </div>
   <div class="content">
     <h1>Tutorials</h1>
-    <p class="subtitle">Rust Mode comes in two forms. One is a plugin for the Processing IDE, which lets you write sketches inside Processing itself just like you normally would. The other is a standalone header library you can drop into any Rust project and use from your own editor and build system. Pick the section that matches what you're trying to do.</p>
+    <p class="subtitle">Rust Mode comes in two forms. One is a plugin for the Processing IDE, which lets you write sketches inside Processing itself just like you normally would. The other is the engine as a Rust crate you can use in any Cargo project. Pick the section that matches what you're trying to do.</p>
 
     <div class="path">
       <h2>Using Rust Mode inside the Processing IDE</h2>
-      <p class="section-desc">This is for people who want the Processing experience they're already familiar with, writing <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">setup()</code> and <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">draw()</code> inside the Processing app, hitting Run, and seeing a window open. Rust Mode compiles your sketch to native Rust behind the scenes, but the workflow is identical to any other Processing mode.</p>
+      <p class="section-desc">Write <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">setup()</code> and <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">draw()</code> as Rust functions, hit Run, and see a window open. Rust Mode turns your sketch into a small Rust program and compiles it against a prebuilt engine, so after the first run it only rebuilds your code.</p>
 
       <a class="tutorial-card" href="/gettingstarted">
         <div class="tc-body">
           <div class="tc-title">Getting Started with Rust Mode</div>
-          <div class="tc-desc">How to install the Rust Mode plugin and write your first sketch in the Processing IDE.</div>
+          <div class="tc-desc">How to install Rust Mode and write your first sketch in the Processing IDE.</div>
         </div>
         <div class="tc-arrow">›</div>
       </a>
 
-      <a class="tutorial-card" href="/downloads#cpp-mode">
+      <a class="tutorial-card" href="/downloads#rust-mode">
         <div class="tc-body">
-          <div class="tc-title">Installing the plugin</div>
-          <div class="tc-desc">How to install Rust Mode through the Processing Contribution Manager, with screenshots.</div>
+          <div class="tc-title">Installing the mode</div>
+          <div class="tc-desc">Where to download Rust Mode, where to put it, and what Rust it needs.</div>
+        </div>
+        <div class="tc-arrow">›</div>
+      </a>
+
+      <a class="tutorial-card" href="/whats-new">
+        <div class="tc-body">
+          <div class="tc-title">Coming from Processing Java</div>
+          <div class="tc-desc">The things that change when the same sketch is written in Rust.</div>
         </div>
         <div class="tc-arrow">›</div>
       </a>
     </div>
 
     <div class="path">
-      <h2>Using the header library in your own Rust project</h2>
-      <p class="section-desc">This is for people who want to use the Processing-style API directly in a Rust project, without opening the Processing IDE at all. You write <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">#include "Processing.h"</code> at the top of your file and build with your own compiler and tools. Two setup options are available depending on whether you use CMake or not.</p>
-
-      <a class="tutorial-card" href="/downloads/plugandplay-setup.html">
-        <div class="tc-body">
-          <div class="tc-title">Plug and Play Setup</div>
-          <div class="tc-desc">The simplest path. Unzip one folder next to your source file and run a script to build. No CMake, no configuration. Good if you're just starting out or want something running quickly.</div>
-        </div>
-        <div class="tc-arrow">›</div>
-      </a>
-
-      <a class="tutorial-card" href="/downloads/cmake-setup.html">
-        <div class="tc-body">
-          <div class="tc-title">CMake Setup</div>
-          <div class="tc-desc">Adds the engine to your project as a proper CMake library target. Pick this if your project already uses CMake, or if you want a setup that scales as your project grows.</div>
-        </div>
-        <div class="tc-arrow">›</div>
-      </a>
-
+      <h2>Using the engine in your own Rust project</h2>
+      <p class="section-desc">The engine is a normal crate. Add it to <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">Cargo.toml</code>, write a <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">main()</code> that hands it your state and your setup and draw functions, and build with <code style="font-family:monospace;background:#f4f4f4;padding:1px 5px;border-radius:3px;">cargo run</code>. See <a href="/downloads#crate" style="border-bottom:1px solid #ddd;">the crate</a> on the Downloads page.</p>
     </div>
 
     <div class="help-box">
-      <p>Still not sure which one fits? If you know Processing and just want to keep working the same way, go with <a href="/gettingstarted">Getting Started</a>. If you want to use the engine in a Rust project you're writing yourself, <a href="/downloads/plugandplay-setup.html">Plug and Play</a> is the quickest way in.</p>
+      <p>Still not sure which one fits? If you know Processing and just want to keep working the same way, go with <a href="/gettingstarted">Getting Started</a>. If you already have a Cargo project, use <a href="/downloads#crate">the crate</a>.</p>
     </div>
   </div>
 </div>

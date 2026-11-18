@@ -1,0 +1,29 @@
+/**
+ * Background Image.
+ *
+ * This example presents the fastest way to load a background image
+ * into Processing. To load an image as the background, it must be
+ * the same width and height as the program.
+ */
+let mut bg: u64 = 0;
+let mut y: i32 = 0;
+
+fn setup() {
+    size(640, 360);
+    // The background image must be the same size as the parameters
+    // into the size() method. In this program, the size of the image
+    // is 640 x 360 pixels.
+    bg = load_image("moonwalk.jpg");
+}
+
+fn draw() {
+    background(bg);
+
+    stroke(226, 204, 0);
+    line(0.0, y as f32, width(), y as f32);
+
+    y += 1;
+    if (y as f32) > height() {
+        y = 0;
+    }
+}

@@ -179,6 +179,7 @@
       button[onclick="toggleHeroEditor()"] { display: none; }
     }
   </style>
+<style>button[onclick="toggleHeroEditor()"], #hero-sketch-run-btn { display: none !important; }</style>
 </head>
 <body>
 
@@ -194,12 +195,12 @@
           Welcome to <span style="color:#003f6b;">Processing</span> for <span style="color:#ce422b;">Rust</span>!
         </h1>
         <p style="font-size:0.95rem;color:#555;line-height:1.8;max-width:440px;font-family:'Space Grotesk',sans-serif;">
-          Processing has helped hundreds of thousands of students, artists, and developers learn to code through visual work. Rust Mode brings that same idea to Rust. You get Rust's speed and safety, and your sketches run on the same native engine as Rust Mode. If you already know Processing, you already know most of what you need.
+          Processing has helped hundreds of thousands of students, artists, and developers learn to code through visual work. Rust Mode brings that same idea to Rust. You get Rust's speed and safety, and your sketches compile to native programs. If you already know Processing, you already know most of what you need.
         </p>
         <div class="hero-actions">
           <a class="hero-link" href="/reference">Reference</a>
           <a class="hero-btn-download" href="/downloads">Download</a>
-          <a class="hero-btn-download hero-btn-editor" href="/editor">Open Editor</a>
+          
         </div>
         <textarea id="hero-editor" style="display:none;"></textarea>
 
@@ -538,12 +539,12 @@ function mousePressed() {
       <div class="gs-cards">
         <div class="gs-card">
           <h3>Looking for the Rust Mode?</h3>
-          <p>Install Rust Mode straight from the Processing IDE's Contribution Manager. No separate download needed.</p>
+          <p>Download one zip, unzip it into your sketchbook's modes folder, and restart Processing.</p>
           <a class="gs-card-link" href="/downloads#cpp-mode">See how →</a>
         </div>
         <div class="gs-card">
-          <h3>Download the headers</h3>
-          <p>Using your own editor and build system? Drop the engine into your project as a plug-and-play folder or a CMake target.</p>
+          <h3>Use the crate</h3>
+          <p>Using your own editor? The engine is a Rust crate you can add to any Cargo project.</p>
           <a class="gs-card-link" href="/downloads">Go to downloads →</a>
         </div>
         <div class="gs-card">

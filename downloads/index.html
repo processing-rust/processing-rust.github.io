@@ -95,56 +95,40 @@
     <h1>Downloads</h1>
     <p class="subtitle">Two ways to get Rust Mode, depending on how you want to work.</p>
 
-    <div class="mode-callout" id="cpp-mode">
-      <h2>Looking for the Rust Mode?</h2>
-      <p>If you want the full Processing IDE experience, writing sketches with <code>setup()</code> / <code>draw()</code> inside the Processing app, Rust Mode installs straight from the Contribution Manager. There's nothing to download from this site for that.</p>
+    <div class="mode-callout" id="rust-mode">
+      <h2>Installing Rust Mode</h2>
+      <p>Rust Mode isn't in the Contribution Manager yet, so it's installed by hand. You also need Rust itself: get it from <a href="https://rustup.rs" style="border-bottom:1px solid #ddd;">rustup.rs</a> if you don't have it.</p>
       <ol class="step-list">
-        <li>Open Processing, click the mode dropdown in the top-right of the editor, and choose <strong>Add Mode...</strong></li>
-        <li>Search for <strong>Rust Mode</strong> in the Contribution Manager and click Install.</li>
+        <li>Download <strong>RustMode.zip</strong> from the <a href="https://github.com/llamasjc/RustMode/releases/latest" style="border-bottom:1px solid #ddd;">latest release</a>.</li>
+        <li>Unzip it into the <strong>modes</strong> folder of your sketchbook (Processing shows where the sketchbook is in <strong>File &gt; Preferences</strong>), so you have <code>sketchbook/modes/RustMode</code>.</li>
+        <li>Restart Processing and pick <strong>Rust</strong> from the mode dropdown in the top-right of the editor.</li>
       </ol>
-      <div class="shots">
-        <div>
-          <img class="shot-img" src="../assets/screenshot1.png" alt="Mode dropdown open, &quot;Add Mode...&quot; highlighted"
-               onerror="this.style.display='none'; this.nextElementSibling.classList.add('visible');">
-          <div class="shot-placeholder">
-            <span class="shot-filename">assets/screenshot1.png</span>
-            <span>Mode dropdown open, "Add Mode..." highlighted</span>
-          </div>
-        </div>
-        <div>
-          <img class="shot-img" src="../assets/screenshot2.png" alt="Contribution Manager showing Rust Mode"
-               onerror="this.style.display='none'; this.nextElementSibling.classList.add('visible');">
-          <div class="shot-placeholder">
-            <span class="shot-filename">assets/screenshot2.png</span>
-            <span>Contribution Manager showing Rust Mode</span>
-          </div>
-        </div>
-      </div>
-      <p>Once it's installed, restart Processing and select <strong>Rust</strong> from the same mode dropdown.</p>
+      <p>The zip comes with the engine already compiled for some computers, so your first Run is quick there. On the others the first Run builds the engine once, which takes a few minutes.</p>
     </div>
 
-    <h2>Download the header library</h2>
-    <p>For writing plain Rust in your own editor and build system, with no Processing IDE involved. Both downloads contain the same engine.</p>
+    <h2 id="crate">The engine as a crate</h2>
+    <p>For writing plain Rust in your own editor, with no Processing IDE involved. Add the engine to your <code>Cargo.toml</code>:</p>
+    <pre><code>[dependencies]
+processing = { git = "https://github.com/llamasjc/RustMode" }</code></pre>
+    <p>and give it your sketch:</p>
+    <pre><code>use processing::*;
 
-    <div class="download-cards">
-      <div class="download-card">
-        <h3>Plug and Play</h3>
-        <p>For projects with no existing build system, or compiling a single file directly with <code>g++</code>.</p>
-        <div class="dl-actions">
-          <a class="dl-btn dl-btn-primary" href="https://github.com/processing-cpp/processing.cpp/releases/latest/download/processing-cpp-plugandplay.zip">Download</a>
-          <a class="dl-howto" href="/downloads/plugandplay-setup.html">How to use?</a>
-        </div>
-      </div>
-      <div class="download-card">
-        <h3>CMake</h3>
-        <p>For projects that already use CMake, or want the engine wired up as a library target.</p>
-        <div class="dl-actions">
-          <a class="dl-btn dl-btn-secondary" href="https://github.com/processing-cpp/processing.cpp/releases/latest/download/processing-cpp-cmake.zip">Download</a>
-          <a class="dl-howto" href="/downloads/cmake-setup.html">How to use?</a>
-        </div>
-      </div>
-    </div>
+struct Sketch { x: f32 }
 
+fn setup(s: &amp;mut Sketch) {
+    size(640, 360);
+}
+
+fn draw(s: &amp;mut Sketch) {
+    background(20);
+    s.x = (s.x + 2.0) % width();
+    ellipse(s.x, height() / 2.0, 40.0, 40.0);
+}
+
+fn main() {
+    App::new(Sketch { x: 0.0 }, setup, draw).run();
+}</code></pre>
+    <p>Then <code>cargo run</code>. The code and every release are on <a href="https://github.com/llamasjc/RustMode" style="border-bottom:1px solid #ddd;">GitHub</a>.</p>
   </div>
 </div>
 <footer><p>Rust Mode for Processing</p><p class="footer-contact"><a href="mailto:jose@llamasj.com">jose@llamasj.com</a></p></footer>
