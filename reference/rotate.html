@@ -31,7 +31,7 @@ fn rotate_axis(a: impl Num, x: impl Num, y: impl Num, z: impl Num)</div>
     
     
     <h2>Related</h2><div class="related-links"><a href="rotateX.html">rotateX</a><a href="rotateY.html">rotateY</a><a href="rotateZ.html">rotateZ</a><a href="translate.html">translate</a><a href="scale.html">scale</a></div>
-    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn rotate(angle: f32)         { render::rotate_z(angle); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn rotate_axis(a: impl Num, x: impl Num, y: impl Num, z: impl Num) {
+    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn rotate(angle: f32) { render::rotate_z(angle); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn rotate_axis(a: impl Num, x: impl Num, y: impl Num, z: impl Num) {
     let (a, ax) = (a.f(), norm([x.f(), y.f(), z.f()]));
     if !(dot(ax, ax) &gt; 0.0) { return; }
     #[cfg(feature = "libprocessing")]

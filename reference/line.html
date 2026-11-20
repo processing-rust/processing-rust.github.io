@@ -32,7 +32,7 @@ fn line_3d(x1: impl Num, y1: impl Num, z1: impl Num, x2: impl Num, y2: impl Num,
     
     
     <h2>Related</h2><div class="related-links"><a href="point.html">point</a><a href="strokeWeight.html">strokeWeight</a></div>
-    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn line(x1: f32, y1: f32, x2: f32, y2: f32)          { record::line(x1, y1, x2, y2); render::draw_line(x1, y1, x2, y2); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn line_3d(x1: impl Num, y1: impl Num, z1: impl Num, x2: impl Num, y2: impl Num, z2: impl Num) {
+    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn line(x1: f32, y1: f32, x2: f32, y2: f32) { record::line(x1, y1, x2, y2); render::draw_line(x1, y1, x2, y2); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn line_3d(x1: impl Num, y1: impl Num, z1: impl Num, x2: impl Num, y2: impl Num, z2: impl Num) {
     lp_route! { crate::lp::line_3d([x1.f(), y1.f(), z1.f()], [x2.f(), y2.f(), z2.f()], crate::render::style_pub().1); return; }
     let (m, view, proj, _) = matrices();
     let (w, h) = dims();

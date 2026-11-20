@@ -46,9 +46,8 @@ fn size_renderer(w: u32, h: u32, renderer: u32)</div>
         glfw::set_size(w, h);
         crate::lp::size(w, h);
         return;
-    }
     #[cfg(not(feature = "wasm"))] glfw::set_size(w, h);
-    #[cfg(feature = "wasm")]      wasm::set_size(w, h);
+    #[cfg(feature = "wasm")] wasm::set_size(w, h);
 }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn size_renderer(w: u32, h: u32, renderer: u32) {
     lp_route! {
         if renderer == P3D {

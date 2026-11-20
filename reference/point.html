@@ -32,7 +32,7 @@ fn point_3d(x: impl Num, y: impl Num, z: impl Num)</div>
     
     
     <h2>Related</h2><div class="related-links"><a href="line.html">line</a></div>
-    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn point(x: f32, y: f32)                              { record::point(x, y); render::draw_point(x, y); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn point_3d(x: impl Num, y: impl Num, z: impl Num) {
+    <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn point(x: f32, y: f32) { record::point(x, y); render::draw_point(x, y); }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/three.rs:</p><div class="impl-block">pub fn point_3d(x: impl Num, y: impl Num, z: impl Num) {
     let (x, y, z) = (x.f(), y.f(), z.f());
     line_3d(x, y, z, x, y, z);
 }</div>
