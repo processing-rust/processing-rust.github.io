@@ -50,6 +50,7 @@ fn save_frame(name: &amp;str)</div>
         enc.set_depth(png::BitDepth::Eight);
         enc.write_header()?.write_image_data(&amp;rgb)?;
         Ok(())
+    };
     if let Err(e) = write() { eprintln!("saveFrame(\"{}\"): {}", path, e); }
 }</div>
   </div>

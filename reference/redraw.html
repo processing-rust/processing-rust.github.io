@@ -32,7 +32,7 @@ fn redraw()</div>
     <h2>Related</h2><div class="related-links"><a href="draw.html">draw</a><a href="loop.html">loop</a><a href="noLoop.html">noLoop</a></div>
     <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn redraw() {
     #[cfg(not(feature = "wasm"))] glfw::request_redraw();
-    #[cfg(feature = "wasm")] wasm::request_redraw();
+    #[cfg(feature = "wasm")]      wasm::request_redraw();
 }</div>
   </div>
 </div>

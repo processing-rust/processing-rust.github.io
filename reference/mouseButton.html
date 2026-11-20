@@ -30,7 +30,7 @@
     
     <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn mouse_button() -&gt; u32 {
     #[cfg(not(feature = "wasm"))] { glfw::MOUSE_BUTTON.load(Ordering::Relaxed) }
-    #[cfg(feature = "wasm")] { 37 }
+    #[cfg(feature = "wasm")]      { 37 }
 }</div>
   </div>
 </div>

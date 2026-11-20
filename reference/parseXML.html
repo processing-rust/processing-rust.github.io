@@ -47,8 +47,10 @@ fn parse_xml(text: &amp;str) -&gt; Result&lt;Xml, String&gt;</div>
                 if let Some(top) = stack.last_mut() { top.0.borrow_mut().content.push_str(&amp;text[i + 9..i + e]); }
                 i += e + 3;
                 continue;
+            }
             if text[i..].starts_with("&lt;?") || text[i..].starts_with("&lt;!") {
                 match text[i..].find('&gt;') { Some(e) =&gt; { i += e + 1; continue; } None =&gt; return err(i, "a tag that never ends") }
+            }
             let Some(e) = text[i..].find('&gt;') else { return err(i, "a tag that never ends") };
             let tag = &amp;text[i + 1..i + e];
             i += e + 1;
@@ -56,6 +58,8 @@ fn parse_xml(text: &amp;str) -&gt; Result&lt;Xml, String&gt;</div>
                 let Some(done) = stack.pop() else { return err(i, "a closing tag with nothing open") };
                 if done.get_name() != name.trim() { return err(i, &amp;format!("&lt;/{}&gt; closes &lt;{}&gt;", name.trim(), done.get_name())); }
                 match stack.last_mut() { Some(p) =&gt; { p.add_child_xml(done); } None =&gt; root = Some(done) }
+                continue;
+            }
             let self_close = tag.ends_with('/');
             let tag = tag.trim_end_matches('/');
             let name_end = tag.find(|c: char| c.is_whitespace()).unwrap_or(tag.len());
@@ -70,16 +74,19 @@ fn parse_xml(text: &amp;str) -&gt; Result&lt;Xml, String&gt;</div>
                 let Some(close) = v[1..].find(q) else { return err(i, "an attribute that never ends") };
                 el.0.borrow_mut().attrs.push((key, unescape(&amp;v[1..1 + close])));
                 a = v[close + 2..].trim_start();
+            }
             if self_close {
                 match stack.last_mut() { Some(p) =&gt; { p.add_child_xml(el); } None =&gt; root = Some(el) }
             } else {
                 stack.push(el);
+            }
         } else {
             let e = text[i..].find('&lt;').map(|e| i + e).unwrap_or(b.len());
             let t = &amp;text[i..e];
             if let Some(top) = stack.last_mut() {
                 let mut n = top.0.borrow_mut();
                 if !t.trim().is_empty() || !n.content.is_empty() { n.content.push_str(&amp;unescape(t)); }
+            }
             i = e;
         }
     }
@@ -92,6 +99,7 @@ fn parse_xml(text: &amp;str) -&gt; Result&lt;Xml, String&gt;</div>
             n.children.clone()
         };
         for c in &amp;kids { tidy(c); }
+    }
     let root = root.ok_or("no element in the text")?;
     tidy(&amp;root);
     Ok(root)

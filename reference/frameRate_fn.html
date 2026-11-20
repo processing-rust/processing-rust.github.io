@@ -32,7 +32,7 @@ fn frame_rate(fps: f32)</div>
     <h2>Related</h2><div class="related-links"><a href="frameRate_var.html">frameRate_var</a><a href="frameCount.html">frameCount</a></div>
     <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn frame_rate(fps: f32) {
     #[cfg(not(feature = "wasm"))] glfw::set_frame_rate(fps);
-    #[cfg(feature = "wasm")] wasm::set_frame_rate(fps);
+    #[cfg(feature = "wasm")]      wasm::set_frame_rate(fps);
 }</div>
   </div>
 </div>

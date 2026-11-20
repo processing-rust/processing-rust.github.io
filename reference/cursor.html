@@ -34,7 +34,7 @@ fn cursor_kind(kind: u32)</div>
     <h2>Related</h2><div class="related-links"><a href="noCursor.html">noCursor</a></div>
     <h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn cursor() {
     #[cfg(not(feature = "wasm"))] glfw::set_cursor_visible(true);
-    #[cfg(feature = "wasm")] wasm::set_cursor_visible(true);
+    #[cfg(feature = "wasm")]      wasm::set_cursor_visible(true);
 }</div><h2>Under the Hood</h2><p style="font-size:13px;color:#888;margin-bottom:0.75rem;">From RustMode/src/lib.rs:</p><div class="impl-block">pub fn cursor_kind(kind: u32) {
     #[cfg(not(feature = "wasm"))] glfw::set_cursor_kind(kind);
     cursor();
