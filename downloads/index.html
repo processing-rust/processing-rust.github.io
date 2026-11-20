@@ -99,17 +99,26 @@
       <h2>Installing Rust Mode</h2>
       <p>Rust Mode isn't in the Contribution Manager yet, so it's installed by hand. You also need Rust itself: get it from <a href="https://rustup.rs" style="border-bottom:1px solid #ddd;">rustup.rs</a> if you don't have it.</p>
       <ol class="step-list">
-        <li>Download <strong>RustMode.zip</strong> from the <a href="https://github.com/llamasjc/RustMode/releases/latest" style="border-bottom:1px solid #ddd;">latest release</a>.</li>
+        <li>Download the Rust Mode zip from the <a href="https://github.com/llamasjc/processing-rust/releases/latest" style="border-bottom:1px solid #ddd;">latest release</a>.</li>
         <li>Unzip it into the <strong>modes</strong> folder of your sketchbook (Processing shows where the sketchbook is in <strong>File &gt; Preferences</strong>), so you have <code>sketchbook/modes/RustMode</code>.</li>
         <li>Restart Processing and pick <strong>Rust</strong> from the mode dropdown in the top-right of the editor.</li>
       </ol>
       <p>The zip comes with the engine already compiled for some computers, so your first Run is quick there. On the others the first Run builds the engine once, which takes a few minutes.</p>
+      <div class="dl-actions"><a class="dl-btn dl-btn-primary" href="https://github.com/llamasjc/processing-rust/releases/latest/download/RustMode.zip">Download Rust Mode</a></div>
     </div>
 
     <h2 id="crate">The engine as a crate</h2>
-    <p>For writing plain Rust in your own editor, with no Processing IDE involved. Add the engine to your <code>Cargo.toml</code>:</p>
+    <p>For writing plain Rust in your own editor, with no Processing IDE involved. The quickest start is the starter project: unzip it and <code>cargo run</code>.</p>
+    <div class="dl-actions">
+      <a class="dl-btn dl-btn-primary" href="https://github.com/llamasjc/processing-rust/releases/latest/download/processing-rust-starter.zip">Download the starter project</a>
+      <a class="dl-btn dl-btn-secondary" href="https://github.com/llamasjc/processing-rust/releases/latest/download/processing-rust-crate.zip">Download the crate</a>
+    </div>
+    <p>To add the engine to a project you already have, put this in its <code>Cargo.toml</code>. The <code>[patch]</code> part points Bevy at the Processing fork the engine is built on. Cargo only reads it from your own top-level <code>Cargo.toml</code>, so it has to be there too:</p>
     <pre><code>[dependencies]
-processing = { git = "https://github.com/llamasjc/RustMode" }</code></pre>
+processing = { git = "https://github.com/llamasjc/processing-rust" }
+
+[patch."https://github.com/bevyengine/bevy"]
+bevy = { git = "https://github.com/processing/bevy", branch = "main" }</code></pre>
     <p>and give it your sketch:</p>
     <pre><code>use processing::*;
 
@@ -128,7 +137,7 @@ fn draw(s: &amp;mut Sketch) {
 fn main() {
     App::new(Sketch { x: 0.0 }, setup, draw).run();
 }</code></pre>
-    <p>Then <code>cargo run</code>. The code and every release are on <a href="https://github.com/llamasjc/RustMode" style="border-bottom:1px solid #ddd;">GitHub</a>.</p>
+    <p>Then <code>cargo run</code>. The code and every release are on <a href="https://github.com/llamasjc/processing-rust" style="border-bottom:1px solid #ddd;">GitHub</a>.</p>
   </div>
 </div>
 <footer><p>Rust Mode for Processing</p><p class="footer-contact"><a href="mailto:jose@llamasj.com">jose@llamasj.com</a></p></footer>
